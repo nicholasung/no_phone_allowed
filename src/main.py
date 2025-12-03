@@ -3,6 +3,7 @@ import numpy as np
 from pynput import mouse, keyboard
 import threading
 import time
+import serial
  
 cap = cv.VideoCapture(1)
 idle_threshold = 1
@@ -12,6 +13,16 @@ phone_in_frame = False
 def scream() -> None:
     print("lock in")
     #replace with the serial call to the unpleasantries
+    try: 
+        ser = serial.Serial('COM5', 9600, timeout=10)
+        ser.write(b'0')
+    except serial.SerialException as e:
+        print(f"Error: {e}")
+    finally:
+        # Close the serial port
+        if 'ser' in locals() and ser.is_open:
+            ser.close()
+            print("Serial port closed.")
     return 
 
 def check_for_inactivity():
