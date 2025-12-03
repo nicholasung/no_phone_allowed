@@ -11,7 +11,7 @@ phone_in_frame = False
 
 def scream() -> None:
     print("lock in")
-    #replace with the serial call to the unpleasantries device
+    #replace with the serial call to the unpleasantries
     return 
 
 def check_for_inactivity():
@@ -48,6 +48,10 @@ def camera_loop():
         
         # Display the frame (original or processed)
         cv.imshow('Webcam Feed', frame)
+
+        # Exit the loop when 'q' is pressed
+        if cv.waitKey(1) == ord('q'):
+            break
 
 keyboard_listener = keyboard.Listener(on_press=on_input, on_release=on_input)
 mouse_listener = mouse.Listener(on_click=on_input, on_move=on_input, on_scroll=on_input)
